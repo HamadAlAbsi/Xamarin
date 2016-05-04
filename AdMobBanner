@@ -1,1 +1,33 @@
 
+1- add google play service-ads components to your solution
+
+2-اضافة الصلاحيات الى ال manifest.xml
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	
+	3-اضافة السطرين البرمجين الاتيين الى ال manifest.xml
+	<activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:theme="@android:style/Theme.Translucent" />
+	
+	4-
+	 <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewResult"
+            android:layout_weight="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adUnitId="@string/AdBannerID"
+            ads:adSize="BANNER"
+            android:layout_gravity="bottom" />
+            
+    
+    5- using Android.Gms.Ads;
+    6-
+     void ShowAdsBanner()
+        {
+            mAdView = FindViewById<AdView>(Resource.Id.adViewResult);
+            var adRequest = new AdRequest.Builder().Build();
+            // Start loading the ad.
+            mAdView.LoadAd(adRequest);
+
+        }
+    
+    7- <string name="AdBannerID">here the banner id </string>
