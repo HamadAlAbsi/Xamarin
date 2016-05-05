@@ -8,7 +8,7 @@
 	3-اضافة السطرين البرمجين الاتيين الى ال manifest.xml
 	<activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:theme="@android:style/Theme.Translucent" />
 	
-	4-
+	4-نسخ هذا الكود الى صفحة ال XML
 	 <com.google.android.gms.ads.AdView
             android:id="@+id/adViewResult"
             android:layout_weight="10"
@@ -17,10 +17,11 @@
             ads:adUnitId="@string/AdBannerID"
             ads:adSize="BANNER"
             android:layout_gravity="bottom" />
-            
+       
+      5-   xmlns:ads="http://schemas.android.com/apk/res-auto"
     
-    5- using Android.Gms.Ads;
-    6-
+    6- using Android.Gms.Ads;
+    7-
      void ShowAdsBanner()
         {
             mAdView = FindViewById<AdView>(Resource.Id.adViewResult);
@@ -30,4 +31,4 @@
 
         }
     
-    7- <string name="AdBannerID">here the banner id </string>
+    8- <string name="AdBannerID">here the banner id </string>
