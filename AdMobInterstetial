@@ -1,1 +1,107 @@
 
+
+
+
+//add thsi key to the string file
+
+<string name="interstitial_ad_unit_id">Here the unit id from ad mob</string>
+
+//  AdListener.cs class
+using Android.Gms.Ads;
+
+namespace YemenPhysiciansList.AdMob
+{
+    class adlistener: AdListener
+    {
+
+        // Declare the delegate (if using non-generic pattern).
+        public delegate void AdLoadedEvent();
+        public delegate void AdClosedEvent();
+        public delegate void AdOpenedEvent();
+
+
+
+        // Declare the event.
+        public event AdLoadedEvent AdLoaded;
+        public event AdClosedEvent AdClosed;
+        public event AdOpenedEvent AdOpened;
+
+        public override void OnAdLoaded()
+        {
+            if (AdLoaded != null) this.AdLoaded();
+            base.OnAdLoaded();
+        }
+
+        public override void OnAdClosed()
+        {
+            if (AdClosed != null) this.AdClosed();
+            base.OnAdClosed();
+        }
+        public override void OnAdOpened()
+        {
+            if (AdOpened != null) this.AdOpened();
+            base.OnAdOpened();
+        }
+    }
+}
+
+// add class AdWrapper.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.Gms.Ads;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+
+namespace YemenPhysiciansList.AdMob
+{
+    public static class AdWrapper
+    {
+
+        public static InterstitialAd ConstructFullPageAdd(Context con, string UnitID)
+        {
+            var ad = new InterstitialAd(con);
+            ad.AdUnitId = UnitID;
+            return ad;
+        }
+
+
+        public static InterstitialAd CustomBuild(this InterstitialAd ad)
+        {
+            var requestbuilder = new AdRequest.Builder();
+            ad.LoadAd(requestbuilder.Build());
+            return ad;
+        }
+
+    
+
+
+
+    }
+}
+
+ // function that create Interstitial Ads
+
+        void ShowInterstitial()
+        {
+
+
+            var FinalInterstitialAd = AdMob.AdWrapper.ConstructFullPageAdd(this, GetString(Resource.String.interstitial_ad_unit_id));
+            var intListenr = new AdMob.adlistener();
+
+            intListenr.AdLoaded += () => { if (FinalInterstitialAd.IsLoaded) FinalInterstitialAd.Show(); };
+            FinalInterstitialAd.AdListener = intListenr;
+            AdMob.AdWrapper.CustomBuild(FinalInterstitialAd);
+
+
+           
+
+        }
