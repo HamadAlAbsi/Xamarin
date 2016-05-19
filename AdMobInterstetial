@@ -9,7 +9,7 @@
 //  AdListener.cs class
 using Android.Gms.Ads;
 
-namespace YemenPhysiciansList.AdMob
+namespace HamadVideosAdmobApp.AdMob
 {
     class adlistener: AdListener
     {
@@ -61,7 +61,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace YemenPhysiciansList.AdMob
+namespace HamadVideosAdmobApp.AdMob
 {
     public static class AdWrapper
     {
