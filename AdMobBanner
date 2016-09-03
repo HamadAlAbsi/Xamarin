@@ -21,7 +21,14 @@
 5-   xmlns:ads="http://schemas.android.com/apk/res-auto"
     
 6- using Android.Gms.Ads;
-7-
+7-قم باضافة هذا التعريف
+
+AdView mAdView;
+
+8- قم باستدعاء الدالة في كود onCreate()
+  ShowAdsBanner();
+
+9- قم باضافة الدالة التاليه والتي تقوم باستدعاء الاعلانات من سيرفرات قوقل
      void ShowAdsBanner()
         {
             mAdView = FindViewById<AdView>(Resource.Id.adViewResult);
@@ -31,4 +38,5 @@
 
         }
         
- 8- <string name="AdBannerID">here the banner id </string>
+ 10- قم باضافة هذا السطر الى ملف السترنق  مع استبدال الكود الخاص بك من ادموب 
+         <string name="AdBannerID">here the banner id </string>
