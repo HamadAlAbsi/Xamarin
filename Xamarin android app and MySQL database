@@ -1,0 +1,119 @@
+
+How to connect from your android app to online mysql database using Xamarin
+
+1- you have to create database or use in existing database
+
+in my video I will use db4free.net
+
+prepare the db information :
+- dbname , link, user name, password ,port , charset
+
+2- create  an Android app in Xamarin VS2015
+3- add component MySQL plugin 
+4- add refrence System.Data
+
+5- prepare the axml page layout and control like this code
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Username"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etusername" />
+    <TextView
+        android:text="Password"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etPass" />
+    <Button
+        android:text="Signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btninsert" />
+    <TextView
+        android:text="Tips"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTips" />
+</LinearLayout>
+
+
+6- start coding 
+
+ in the page you will import the libriries 
+using System.Data;
+using MySql.Data.MySqlClient;
+
+
+7- add this  code to the page to load
+ private EditText etusername;
+        private EditText etpass;
+        private Button btninsert;
+        private TextView tvTips;
+
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            SetContentView(Resource.Layout.Main);
+
+
+            etusername = FindViewById<EditText>(Resource.Id.etusername);
+            etpass = FindViewById<EditText>(Resource.Id.etPass);
+            btninsert = FindViewById<Button>(Resource.Id.btninsert);
+            tvTips = FindViewById<TextView>(Resource.Id.tvTips);
+
+            btninsert.Click += Btninsert_Click;
+        }
+
+        private void Btninsert_Click(object sender, System.EventArgs e)
+        {
+
+            InsertInfo(etusername.Text, etpass.Text);
+
+          
+            
+        }
+
+        void InsertInfo(string userPar,string passPar)
+        {
+            MySqlConnection conn = new MySqlConnection("server=db4free.net;port=3307;database=h21db;user id=hamadvideos;password=hamadvideos;charset=utf8");
+
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    tvTips.Text = " Successfully connected";
+                    MySqlCommand cmd = new MySqlCommand("insert into testTest(username,userpass) values(@user,@pass)", conn);
+                    cmd.Parameters.AddWithValue("@user", userPar);
+                    cmd.Parameters.AddWithValue("@pass", passPar);
+                    cmd.ExecuteNonQuery();
+                    tvTips.Text = "Successfully Signup";
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                tvTips.Text = ex.ToString();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
