@@ -1,0 +1,34 @@
+
+1- add google play service-ads components to your solution
+
+2-اضافة الصلاحيات الى ال manifest.xml
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	
+3-اضافة الاسطر البرمجية التالية الى ال manifest.xml
+<activity android:name="com.google.android.gms.ads.AdActivity"
+android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" 
+android:theme="@android:style/Theme.Translucent" />
+
+ <com.google.android.gms.ads.NativeExpressAdView
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:id="@+id/adviewNative"
+    android:layout_gravity="center_horizontal"
+    ads:adSize="360X320"
+    ads:adUnitId="ca-app-pub-5468739878863076/3306584547"
+       
+    />
+    
+    using Android.Gms.Ads;
+    
+     NativeExpressAdView adview = FindViewById<NativeExpressAdView>(Resource.Id.adviewNative);
+
+            adview.LoadAd(new AdRequest.Builder().Build());
+            
+            
+            
+             Run and enjoy earning 
+             
+             Best Regards Hamad Al-Absi
+            
