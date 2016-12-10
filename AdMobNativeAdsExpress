@@ -10,6 +10,10 @@
 android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" 
 android:theme="@android:style/Theme.Translucent" />
 
+4- add these code to the XAML files
+
+xmlns:ads="http://schemas.android.com/apk/res-auto"
+
  <com.google.android.gms.ads.NativeExpressAdView
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
@@ -20,6 +24,7 @@ android:theme="@android:style/Theme.Translucent" />
        
     />
     
+ 5-   in the c# file you have to add this code.
     using Android.Gms.Ads;
     
      NativeExpressAdView adview = FindViewById<NativeExpressAdView>(Resource.Id.adviewNative);
@@ -30,5 +35,6 @@ android:theme="@android:style/Theme.Translucent" />
             
              Run and enjoy earning 
              
-             Best Regards Hamad Al-Absi
+             Best Regards 
+	     Hamad Al-Absi  حمد العبسي
             
