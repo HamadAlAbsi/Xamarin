@@ -20,8 +20,7 @@ xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/adviewNative"
     android:layout_gravity="center_horizontal"
     ads:adSize="360X320"
-    ads:adUnitId="ca-app-pub-5468739878863076/3306584547"
-       
+    ads:adUnitId="ca-app-pub-5468739878863076/7980679347"       
     />
     
  5-   in the c# file you have to add this code.
