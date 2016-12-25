@@ -1,0 +1,87 @@
+
+
+// in web.config you have to add these lines  before  </system.web>
+  <webServices>
+
+      <protocols>
+        <add name="HttpGet"/>
+        
+      </protocols>
+      
+    </webServices>
+    
+    //for Json you have to add these 
+     [WebMethod(MessageName = "GetContactJson", Description = "Return contact data from DB Json Format")]
+    [ScriptMethod(ResponseFormat=ResponseFormat.Json,UseHttpGet =true)]
+    
+    
+    // this example for Json output function 
+       public string GetContactJson()
+        {
+
+                   SqlConnection conn = new SqlConnection(new dbConnectionClass().connectioninfo);
+            // here I have to creare list of contact calss
+            List<contact> contactslist = new List<contact>();
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                    SqlDataReader dr;
+
+                    SqlCommand cmd = new SqlCommand("select id,name,email,mobile from contacts ", conn);
+
+                    // cmd.Parameters.AddWithValue("@username", username);
+                    //  cmd.Parameters.AddWithValue("@pass", password);
+                   
+                    dr = cmd.ExecuteReader();
+                 
+
+                    while (dr.Read())
+                    {
+                        var contact = new contact
+                        {
+                            id = Int32.Parse(dr["id"].ToString()),
+                            name = dr["name"].ToString(),
+                        email = dr["email"].ToString(),
+                            mobileNumber = dr["mobile"].ToString()
+
+                    };
+                        contactslist.Add(contact);
+                    }
+                    dr.Close();
+                   
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+               
+            }
+            finally
+            {
+
+                conn.Close();
+               
+            }
+            return ser.Serialize(contactslist);
+
+        }
+    
+    //for XML you have to add these lines 
+     [WebMethod(MessageName = "GetContact",Description ="Return contact data from DB")]
+         [System.Xml.Serialization.XmlInclude(typeof(contact))]
+         
+         // here example of XML output
+         
+            public contact GetContactXML()
+        {
+
+            contact mycontact = new contact();
+            mycontact.name = "Hamad";
+            mycontact.email = "Hamad@";
+            mycontact.mobileNumber = "0555";
+            return mycontact;
+        }
+    
