@@ -35,8 +35,6 @@
                     //  cmd.Parameters.AddWithValue("@pass", password);
                    
                     dr = cmd.ExecuteReader();
-                 
-
                     while (dr.Read())
                     {
                         var contact = new contact
@@ -52,24 +50,30 @@
                     dr.Close();
                    
                 }
-
-
-            }
+           }
             catch (SqlException ex)
             {
                
             }
             finally
             {
-
                 conn.Close();
-               
-            }
+                           }
             return ser.Serialize(contactslist);
 
         }
+        
+        // contact.class 
+          public class contact
+    {
+        public int id;
+       public string name;
+       public  string email;
+       public  string mobileNumber;
+    }
     
     //for XML you have to add these lines 
+    
      [WebMethod(MessageName = "GetContact",Description ="Return contact data from DB")]
          [System.Xml.Serialization.XmlInclude(typeof(contact))]
          
@@ -77,7 +81,6 @@
          
             public contact GetContactXML()
         {
-
             contact mycontact = new contact();
             mycontact.name = "Hamad";
             mycontact.email = "Hamad@";
