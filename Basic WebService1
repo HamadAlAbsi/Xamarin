@@ -55,7 +55,8 @@ web.config
             mycontact.email = "Hamad@";
             mycontact.mobileNumber = "0555";
             JavaScriptSerializer ser = new JavaScriptSerializer();
-          HttpContext.Current.Response.Write(ser.Serialize(mycontact));
+        //  HttpContext.Current.Response.Write(ser.Serialize(mycontact));
+         return ser.Serialize(mycontact);
           }
          
          
