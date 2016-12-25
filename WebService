@@ -10,6 +10,9 @@
       
     </webServices>
     
+     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
+     [System.Web.Script.Services.ScriptService]
+    
     //for Json you have to add these 
      [WebMethod(MessageName = "GetContactJson", Description = "Return contact data from DB Json Format")]
     [ScriptMethod(ResponseFormat=ResponseFormat.Json,UseHttpGet =true)]
@@ -58,7 +61,7 @@
             finally
             {
                 conn.Close();
-                           }
+              }
             return ser.Serialize(contactslist);
 
         }
