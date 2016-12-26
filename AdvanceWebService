@@ -21,7 +21,7 @@
     // this example for Json output function 
        public string GetContactJson()
         {
-
+          JavaScriptSerializer ser = new JavaScriptSerializer();
                    SqlConnection conn = new SqlConnection(new dbConnectionClass().connectioninfo);
             // here I have to creare list of contact calss
             List<contact> contactslist = new List<contact>();
@@ -33,10 +33,6 @@
                     SqlDataReader dr;
 
                     SqlCommand cmd = new SqlCommand("select id,name,email,mobile from contacts ", conn);
-
-                    // cmd.Parameters.AddWithValue("@username", username);
-                    //  cmd.Parameters.AddWithValue("@pass", password);
-                   
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
@@ -75,19 +71,4 @@
        public  string mobileNumber;
     }
     
-    //for XML you have to add these lines 
-    
-     [WebMethod(MessageName = "GetContact",Description ="Return contact data from DB")]
-         [System.Xml.Serialization.XmlInclude(typeof(contact))]
-         
-         // here example of XML output
-         
-            public contact GetContactXML()
-        {
-            contact mycontact = new contact();
-            mycontact.name = "Hamad";
-            mycontact.email = "Hamad@";
-            mycontact.mobileNumber = "0555";
-            return mycontact;
-        }
-    
+  
