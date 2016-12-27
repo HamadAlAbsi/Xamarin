@@ -1,0 +1,26 @@
+
+
+1- add new activity call it splashscreen
+
+2- on the splashscreen.cs write the following 
+             StartActivity(typeof(MainActivity));
+             Finish();
+             
+   // also update this
+             
+       [Activity(Label = "SplashScreen", Icon = "@drawable/icon", Theme = "@style/splashTheme",
+       MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]     
+3- on the MainActivity.cs update 
+       MainLauncher = false
+       
+       
+4- in style.xml
+
+<style name="splashTheme" parent="MainTheme.Base">
+    <item name="android:windowBackground">@drawable/HamadLogoupdated</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+  
+  5- don't forget to upload your picture to the @drawable
+  
+  
