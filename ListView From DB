@@ -1,0 +1,128 @@
+
+
+1- Create TicketLayout that will show in the list ContactTicketlayout.axml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/Text"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dip"
+        android:layout_alignParentLeft="true">
+        <TextView
+            android:id="@+id/tvContactName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF7F3300"
+            android:textSize="20dip"
+            android:textStyle="italic"
+            android:text="Name"
+            android:paddingLeft="10dip" />
+        <TextView
+            android:id="@+id/tvMobileNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dip"
+            android:textColor="#FF267F00"
+            android:paddingLeft="100dip"
+            android:text="Mobile Number" />
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dip"
+            android:textColor="#FF267F00"
+            android:paddingLeft="100dip"
+            android:text="Email" />
+    </LinearLayout>
+</RelativeLayout>
+
+// now the Adapter which will carry the Ticket
+2- Create Adapter ContactAdapter.cs
+
+
+namespace App1ListwithWebservice
+{
+    public class ContactAdapter : BaseAdapter<contactclass>
+    {
+
+        List<contactclass> contact;
+
+        Activity context;
+        public ContactAdapter(Activity context, List<contactclass> items)
+                : base()
+            {
+            this.context = context;
+            this.contact = items;
+        }
+        public override contactclass this[int position]
+        {
+            get
+            {
+                return contact[position];
+            }
+        }
+
+       
+        public override int Count
+        {
+            get
+            {
+                return contact.Count;
+            }
+        }
+
+        public override long GetItemId(int position)
+        {
+            return position;
+        }
+
+        public override View GetView(int position, View convertView, ViewGroup parent)
+        {
+            var item = contact[position];
+            View view = convertView;
+            if (view == null) // no view to re-use, create new
+                view = context.LayoutInflater.Inflate(Resource.Layout.ContactTicketlayout, null);
+            view.FindViewById<TextView>(Resource.Id.tvContactName).Text = item.name;
+            view.FindViewById<TextView>(Resource.Id.tvEmail).Text = item.email;
+            view.FindViewById<TextView>(Resource.Id.tvMobileNumber).Text = item.mobileNumber;
+           
+            return view;
+        }
+    }
+}
+
+3- Create Class contactclass.cs
+
+{
+   public  class contactclass
+    {
+
+        // class must be same as ticket 
+
+        public int id;
+        public string name;
+        public string email;
+        public string mobileNumber;
+
+
+        public contactclass(string name,string email, string mobile)
+        {
+            this.name = name;
+            this.email = email;
+            this.mobileNumber = mobile;
+        }
+
+    }
+}
+
+
+
+
+
