@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:textColor="#FF7F3300"
             android:textSize="20dip"
-            android:textStyle="italic"
             android:text="Name"
             android:paddingLeft="10dip" />
         <TextView
@@ -123,6 +122,41 @@ namespace App1ListwithWebservice
 }
 
 
+// 
+    private void PopulateListView()
+        {
+            if (jsonString == null)
+            {
+                tvresult.Text = "JsonString is Null";
 
+            }
+            else
+            {
+                try
+                {
+                    //  jsonobject = JObject.Parse(jsonString);
+                    jsonArray = JArray.Parse(jsonString);
+                    List<contactclass> contactItems = new List<contactclass>();
+                    int count = 0;
+                    while (count < jsonArray.Count)
+                    {
+                        contactclass contact = new contactclass(jsonArray[count]["name"].ToString(), jsonArray[count]["email"].ToString(), jsonArray[count]["mobileNumber"].ToString());
+                        //      Toast.MakeText(this, jsonArray[count]["name"].ToString(), ToastLength.Long).Show();
+                        contactItems.Add(contact);
+                             count++;
+                    }
+                   
+                    lvcontact.Adapter = new ContactAdapter(this, contactItems);
+                }
+                catch (System.Exception exception)
+                {
+
+                    tvresult.Text = exception.ToString();
+                }
+
+              
+            }
+
+        }
 
 
