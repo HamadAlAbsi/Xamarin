@@ -1,0 +1,59 @@
+
+
+https://developer.xamarin.com/guides/android/platform_features/maps_and_location/maps/part_2_-_maps_api/
+
+1- Installing the Google Play Services SDK
+
+
+2- Adding the Google Play Services Maps Component to your visual studio Xamarin
+
+3-Creating an Emulator with Google APIs
+
+4-  add permissions to your project
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <!-- Allow the application to access Google web-based services. -->
+  <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+  
+  
+5- get the google map key from https://console.developers.google.com/apis
+  
+  this link will show you how to get the google map key
+  https://developer.xamarin.com/guides/android/platform_features/maps_and_location/maps/obtaining_a_google_maps_api_key/
+  
+6- add the google map key you get to your string file in the xamarin project  like this:
+ <string name="googleMapKey"> here you will paste your google map key</string>
+  
+  
+7- add the following code to your application tag in AndroidManifest.xml
+ <!-- Put your Google Maps V2 API Key here. -->
+    <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="@string/googleMapKey" />
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    
+8-Adding A MapFragment To An Activity in the xml file 
+
+      <?xml version="1.0" encoding="utf-8"?>
+      <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/map"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          class="com.google.android.gms.maps.MapFragment" />
+          
+ 9-add the following code to your cs file 
+
+
+        private void setmyMap()
+            {
+           
+                if(gmap==null)
+                   {
+                      FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
+                   }
+
+           
+            }
+          
+          
+          
+          
