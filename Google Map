@@ -22,6 +22,10 @@ https://developer.xamarin.com/guides/android/platform_features/maps_and_location
   this link will show you how to get the google map key
   https://developer.xamarin.com/guides/android/platform_features/maps_and_location/maps/obtaining_a_google_maps_api_key/
   
+  Video link how to get your SHA1 
+  https://www.youtube.com/watch?v=4rCYA0usYno&index=1&list=PL_fM3hPRoGFayOTKsCYvC5c93mpQA_GNP
+  
+  
 6- add the google map key you get to your string file in the xamarin project  like this:
  <string name="googleMapKey"> here you will paste your google map key</string>
   
